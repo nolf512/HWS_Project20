@@ -82,5 +82,41 @@ class GameScene: SKScene {
     
     @objc func launchFireworks(){
         
+        let movementAmount: CGFloat = 1800
+        
+        switch Int.random(in: 1...3) {
+        
+        case 0:
+            createFireworks(xMovement: 0, x: 512, y: bottomtEdge)
+            createFireworks(xMovement: 0, x: 512 - 200, y: bottomtEdge)
+            createFireworks(xMovement: 0, x: 512 - 100, y: bottomtEdge)
+            createFireworks(xMovement: 0, x: 512 + 200, y: bottomtEdge)
+            createFireworks(xMovement: 0, x: 512 + 100, y: bottomtEdge)
+            
+        case 1:
+            createFireworks(xMovement: 0, x: 512, y: bottomtEdge)
+            createFireworks(xMovement: -200, x: 512 - 200, y: bottomtEdge)
+            createFireworks(xMovement: -100, x: 512 - 100, y: bottomtEdge)
+            createFireworks(xMovement: 100, x: 512 + 200, y: bottomtEdge)
+            createFireworks(xMovement: 2000, x: 512 + 100, y: bottomtEdge)
+            
+        case 2:
+            createFireworks(xMovement: movementAmount, x: leftEdge, y: bottomtEdge + 400)
+            createFireworks(xMovement: movementAmount, x: leftEdge, y: bottomtEdge + 300)
+            createFireworks(xMovement: movementAmount, x: leftEdge, y: bottomtEdge + 200)
+            createFireworks(xMovement: movementAmount, x: leftEdge, y: bottomtEdge + 100)
+            createFireworks(xMovement: movementAmount, x: leftEdge, y: bottomtEdge)
+            
+        case 3:
+            createFireworks(xMovement: -movementAmount, x: rightEdge, y: bottomtEdge + 400)
+            createFireworks(xMovement: -movementAmount, x: rightEdge, y: bottomtEdge + 300)
+            createFireworks(xMovement: -movementAmount, x: rightEdge, y: bottomtEdge + 200)
+            createFireworks(xMovement: -movementAmount, x: rightEdge, y: bottomtEdge + 100)
+            createFireworks(xMovement: -movementAmount, x: rightEdge, y: bottomtEdge)
+            
+        default:
+            break
+        }
+        
     }
 }
