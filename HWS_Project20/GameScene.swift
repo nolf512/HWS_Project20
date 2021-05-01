@@ -119,4 +119,57 @@ class GameScene: SKScene {
         }
         
     }
+    
+    
+    func checkTouches(_ touces: Set<UITouch>){
+        guard let touch = touces.first else { return }
+        
+        let location = touch.location(in: self)
+        let nodesAtPoint = nodes(at: location)
+        
+        //nodeをループしてfireworkを見つける
+        for case let node as SKSpriteNode in nodesAtPoint { //型キャストができたらループを実行
+            guard node.name == "firework" else { continue }
+            
+            //内部ループ
+            for parent in fireworks {
+                guard let firework = parent.children.first as? SKSpriteNode else { continue }
+                
+                if firework.name == "selected" && firework.color != node.color {
+                    firework.name = "firework"
+                    firework.colorBlendFactor = 1
+                }
+            }
+            //nodeをfireworkからselectedに変更
+            node.name = "selected"
+            node.colorBlendFactor = 0
+        }
+        
+    }
+    
+    //タッチ情報を送信
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        checkTouches(touches)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        checkTouches(touches)
+    }
+    
+    
+    
+    override func update(_ currentTime: TimeInterval) {
+        for (index, firework) in fireworks.enumerated().reversed() {
+            
+            //花火が垂直方向に900進んだら配列から削除
+            if firework.position.y > 900 {
+                fireworks.remove(at: index)
+                firework.removeFromParent()
+            }
+        }
+    }
+    
 }
